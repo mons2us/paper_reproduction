@@ -33,17 +33,24 @@ optional arguments:
 
 For train,
 ```bash
-$ python main.py --mode=train --batch_size=64 --epochs=10 --latent_dims=20 --use_cuda=True --model_pth='/your/directory/to/model.pkl'
+$ python main.py --mode=train \
+                 --batch_size=64 \
+                 --epochs=10 \
+                 --latent_dims=20 \
+                 --use_cuda=True \
+                 --model_pth='/your/directory/to/model.pkl'
 ```
 
 For test,
 ```bash
-$ python main.py --mode=test --model_pth='/your/directory/to/model.pkl'
+$ python main.py --mode=test \
+                 --model_pth='/your/directory/to/model.pkl'
 ```
 
 ## Visualization (Result)
 Running
 ```bash
-$ python main.py --mode=visualize --model_pth='/your/directory/to/model.pkl'
+$ python main.py --mode=visualize \
+                 --model_pth='/your/directory/to/model.pkl'
 ```
 will give you plots as under;
