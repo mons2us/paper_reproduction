@@ -1,7 +1,8 @@
 ## Overview
 This is an implementation of VAE using pytorch,<br>
 as a reproduction of the paper \<Auto-Encoding Variational Bayes\>, Diederik P Kingma, et al., 2013.<br>
-[paper link](https://arxiv.org/abs/1312.6114)
+[paper link](https://arxiv.org/abs/1312.6114)<br><br>
+To read my review on the paper(_written in Korean_), please follow the [link](https://mons2us.github.io/deeplearning/2020/10/10/vae.html) to my blog.
 
 ## Installation
 ```bash
