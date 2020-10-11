@@ -1,6 +1,7 @@
 ## Overview
-This is an implementation of VAE using pytorch,
-as a reproduction of the paper \<Auto-Encoding Variational Bayes\>, Diederik P Kingma, et al., 2013. (https://arxiv.org/abs/1312.6114)
+This is an implementation of VAE using pytorch,<br>
+as a reproduction of the paper \<Auto-Encoding Variational Bayes\>, Diederik P Kingma, et al., 2013.<br>
+[paper link](https://arxiv.org/abs/1312.6114)
 
 ## Installation
 ```bash
@@ -53,5 +54,5 @@ Running
 $ python main.py --mode=visualize \
                  --model_pth='/your/directory/to/model.pkl'
 ```
-will give you plots as under;
+will give you plots as under;<br>
 ![image](./assets/mnist_vis_decoded.png)
