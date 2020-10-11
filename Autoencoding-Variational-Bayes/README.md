@@ -54,3 +54,4 @@ $ python main.py --mode=visualize \
                  --model_pth='/your/directory/to/model.pkl'
 ```
 will give you plots as under;
+![image](/assets/mnist_vis_decoded.png)
