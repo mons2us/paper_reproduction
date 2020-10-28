@@ -27,6 +27,8 @@ class CNN(nn.Module):
     
     def __init__(self, in_channels = 1, class_num = 10):
         super(CNN, self).__init__()
+
+        self.class_num = class_num
     
         # Common Function
         self.maxpool_22 = nn.MaxPool2d(2, 2)
@@ -35,7 +37,7 @@ class CNN(nn.Module):
         # Block 1
         b1_conv1 = nn.Conv2d(in_channels = in_channels, out_channels = 32, kernel_size = 5, stride = 1, padding = 1)
         
-        # Res: (32-5+2)/1 + 1 = 30
+        # Res: (32-5+2)/1 + 1 = 30 -> 15
         self.b1_block = nn.Sequential(b1_conv1,
                                     nn.ReLU(),
                                     self.maxpool_22)
@@ -43,19 +45,23 @@ class CNN(nn.Module):
         # Block 2
         b2_conv1 = nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = 5, stride = 1, padding = 1)
         
-        # res: (30-5+2)/1 + 1 = 28
+        # res: (15-5+2)/1 + 1 = 7
         self.b2_block = nn.Sequential(b2_conv1,
                                     nn.ReLU(),
                                     self.maxpool_22)
         
         # FC layer
-        fc_1 = nn.Linear(28 * 28 * 64, class_num)
+        self.fc_1 = nn.Linear(5 * 5 * 64, self.class_num)
+
         
         
     def forward(self, x):
-        
         out = self.b1_block(x)
         out = self.b2_block(out)
+
+        dim = torch.prod(torch.tensor(out.size()[1:]), 0)
+        out = out.view(-1, dim)
+
         out = self.fc_1(out)
         
         return out
