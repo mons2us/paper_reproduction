@@ -6,7 +6,8 @@ To read my review on the paper(_written in Korean_), please follow the [link](ht
 
 ## Installation
 ```bash
-$ git clone https://github.com/mons2us/paper_reproduction/Autoencoding-Variational-Bayes.git
+$ git clone https://github.com/mons2us/paper_reproduction.git
+$ cd <dir>/An Architecture Combining Convolutional Neural Network and Support Vector Machine for Image Classification
 $ pip install -r requirements.txt
 # This implementation was made under python 3.7
 ```
