@@ -2,7 +2,7 @@
 This is an implementation of CNN-SVM architecture using pytorch,<br>
 as a reproduction of the paper \<
 An Architecture Combining Convolutional Neural Network and Support Vector Machine for Image Classification\>, Abien Fred M. Agarap, 2017. [paper link](https://arxiv.org/abs/1712.03541)<br><br>
-To read my review on the paper(_written in Korean_), please follow the [link](https://mons2us.github.io/deeplearning/2020/10/10/vae.html) to my blog.
+To read my review on the paper(_written in Korean_), please follow the [link](https://mons2us.github.io/paper-reproduction/deeplearning/2020/10/28/cnn_svm.html) to my blog.
 
 ## Installation
 ```bash
