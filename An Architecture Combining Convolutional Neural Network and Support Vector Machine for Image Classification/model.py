@@ -4,7 +4,7 @@ from torch import nn, optim
 from torch.nn import functional as F
 
 '''
-CNN model used in the paper,
+CNN model used in the paper <An Architecture Combining Convolutional Neural Network and Support Vector Machine for Image Classification>
 (1) INPUT: 32 × 32 × 1
 
 # Block 1
@@ -31,39 +31,45 @@ class CNN(nn.Module):
         self.class_num = class_num
     
         # Common Function
-        self.maxpool_22 = nn.MaxPool2d(2, 2)
+        self.maxpool_22 = nn.MaxPool2d(kernel_size=(2, 2))
         self.relu = nn.ReLU()
         
         # Block 1
-        b1_conv1 = nn.Conv2d(in_channels = in_channels, out_channels = 32, kernel_size = 5, stride = 1, padding = 1)
+        b1_conv1 = nn.Conv2d(in_channels = in_channels, out_channels = 32, kernel_size = 5, stride = 1, padding = 2)
         
-        # Res: (32-5+2)/1 + 1 = 30 -> 15
+        # Res: (28-5+4)/1 + 1 = 32 -> 14
         self.b1_block = nn.Sequential(b1_conv1,
-                                    nn.ReLU(),
-                                    self.maxpool_22)
+                                      nn.ReLU(),
+                                      self.maxpool_22)
         
         # Block 2
-        b2_conv1 = nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = 5, stride = 1, padding = 1)
+        b2_conv1 = nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = 5, stride = 1, padding = 2)
         
-        # res: (15-5+2)/1 + 1 = 7
+        # res: (14-5+4)/1 + 1 = 16 -> 7
         self.b2_block = nn.Sequential(b2_conv1,
-                                    nn.ReLU(),
-                                    self.maxpool_22)
+                                      nn.ReLU(),
+                                      self.maxpool_22)
         
         # FC layer
-        self.fc_1 = nn.Linear(5 * 5 * 64, self.class_num)
+        fc_1 = nn.Linear(7 * 7 * 64, 1024)
+        self.fc_block = nn.Sequential(fc_1,
+                                     nn.Dropout(p = 0.5))
 
-        
+        self.fc_last = nn.Linear(1024, self.class_num)
         
     def forward(self, x):
+        # Conv Layers
         out = self.b1_block(x)
         out = self.b2_block(out)
 
+        # Calculate tensor size after all conv layers
         dim = torch.prod(torch.tensor(out.size()[1:]), 0)
         out = out.view(-1, dim)
 
-        out = self.fc_1(out)
+        # Fully connected layers
+        out = self.fc_block(out)
+        out = self.fc_last(out)
         
-        return out
+        return out, self.fc_last.weight
     
 cnn_model = CNN()

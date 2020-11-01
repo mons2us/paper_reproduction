@@ -16,7 +16,8 @@ def test(model, testset, cuda = True):
     
     device = torch.device("cuda" if cuda else "cpu")
     
-    test_loss = 0.0
+    test_acc = 0.0
+    test_accs = []
     
     model.eval()
     with torch.no_grad(): # gradients를 freezing하여 inference만 수행

@@ -15,7 +15,8 @@ def train(model,
           epochs = 10,
           log_interval = 10,
           cuda = True,
-          save_path = './model/trained_softmax.pkl'):
+          save = True,
+          save_path = './model'):
     
     model = model
     trainset = trainset
@@ -23,6 +24,9 @@ def train(model,
     device = torch.device("cuda" if cuda else "cpu")
     #print("Using: {}".format(device))
     
+    # Loss: Softmax or SVM?
+    loss_function = loss_softmax() if train_type == 'softmax' else loss_svm()
+
     train_losses = []
     train_loss = 0
 
@@ -36,10 +40,6 @@ def train(model,
         model.parameters(),
         lr = lr
     )
-    
-    # loss function: softmax or svm?
-    loss_function = loss_softmax() if train_type == 'softmax' else loss_svm()
-
 
     for epoch in tnrange(epochs, desc = 'Training Process'):
         
@@ -50,7 +50,8 @@ def train(model,
 
             optimizer.zero_grad()
             
-            pred = model(images)
+            # w: weight of the last fully connected layer
+            pred, w = model(images)
             
             # 정확도 계산
             pred_label = torch.argmax(pred, axis = 1)
@@ -58,8 +59,7 @@ def train(model,
             pred_tf = torch.sum(torch.eq(pred_label, labels))
             pred_acc = pred_tf/pred.shape[0]
 
-            # Loss 계산
-            loss = loss_function(pred, labels)
+            loss = loss_function(pred, labels, reg_term = w, device = device, current_batch_size = len(images))
             loss.backward() # Backpropagation
             
             # loss at training
@@ -82,7 +82,6 @@ def train(model,
                     pred_acc
                 ))
 
-        print(len(trainset), len(trainset.dataset))
         print("======= Epoch: {}  Average Loss: {:.4f}  Average Acc: {:.4f} =======\n".format(
             epoch + 1,
             train_loss / len(trainset),
@@ -92,16 +91,11 @@ def train(model,
         train_loss = 0
         train_acc = 0
     
-    # save model
-    if not os.path.exists(os.path.dirname(save_path)):
-        print("Directory to save the model does not exist. Make one? [y | n]")
-        if str(input()) == 'y':
-            os.makedirs(os.path.dirname(save_path))
-        elif str(input()) == 'n':
-            print("Then pleas check directory!")
-        else:
-            print("Input should be either y or n")
-    
-    torch.save(model, save_path)
+    if save:
+        try:
+            model_name = os.path.join(save_path, 'model_cnn_softmax.pkl') if train_type == 'softmax' else os.path.join(save_path, 'model_cnn_svm.pkl')
+            torch.save(model, model_name)
+        except Exception as e:
+            print(f"Model saving failed from the following error: {e}")
     
     return train_losses, train_accs
