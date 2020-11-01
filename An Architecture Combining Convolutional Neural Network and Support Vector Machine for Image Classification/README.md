@@ -59,7 +59,7 @@ $ python main.py --mode=test
 
 ## Result
 If you specified your directory to save plots, you can see plots as below saved after your training has finished;
-![img](/assets/assets_post/2020-10-28-cnn_svm/plot_example.jpg)<br>
+![img](./plot/train_plot_acc_softmax.jpg)<br>
 
 When using 'mode=test' argument, test accuracy for the selected dataset will be printed out as;
 ```bash
