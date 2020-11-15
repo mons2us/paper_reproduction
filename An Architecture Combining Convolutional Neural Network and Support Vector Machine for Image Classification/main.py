@@ -52,7 +52,7 @@ if __name__ == '__main__':
     dataset_train, dataset_test = load_datasets(data_type = args.data_type, batch_size = args.batch_size)
     
     # Model path(save or load)
-    if not os.path.exists(args.model_pth):
+    if (not os.path.exists(args.model_pth)) & (args.mode == 'train'):
         print("Directory to save the model does not exist. Make one? [y | n]")
         dir_yn = str(input())
         if dir_yn == 'y':
