@@ -18,10 +18,10 @@ class Generator(nn.Module):
     (1) Generator
     '''
     def __init__(self,
-                 image_size = CONFIGS.image_size,
-                 z_dim = CONFIGS.z_dim,
-                 g_dim = CONFIGS.g_dim,
-                 channel = CONFIGS.bridge_channel):
+                image_size = CONFIGS.image_size,
+                z_dim = CONFIGS.z_dim,
+                g_dim = CONFIGS.g_dim,
+                channel = CONFIGS.bridge_channel):
 
         super(Generator, self).__init__()
 
@@ -67,9 +67,9 @@ class Discriminator(nn.Module):
     ConvTranspose2d(input_c, output_c, kernel_size, stride, padding)
     '''
     def __init__(self,
-                 image_size = CONFIGS.image_size,
-                 d_dim = CONFIGS.d_dim,
-                 channel = CONFIGS.bridge_channel):
+                image_size = CONFIGS.image_size,
+                d_dim = CONFIGS.d_dim,
+                channel = CONFIGS.bridge_channel):
 
         super(Discriminator, self).__init__()
 
