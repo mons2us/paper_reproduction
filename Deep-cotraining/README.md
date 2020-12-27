@@ -1,6 +1,6 @@
 ## Overview
 This is an implementation of deep co-training using pytorch,<br>
-as a reproduction of the paper \<Deep Co-Training for Semi-Supervised Image Recognition\>, Siyuan Qiao et al., 2018. [paper link](https://openaccess.thecvf.com/content_ECCV_2018/papers/Siyuan_Qiao_Deep_Co-Training_for_ECCV_2018_paper.pdf)<br>
+as a reproduction of the paper \<Deep Co-Training for Semi-Supervised Image Recognition, Siyuan Qiao et al., 2018\> [\[paper link]\](https://openaccess.thecvf.com/content_ECCV_2018/papers/Siyuan_Qiao_Deep_Co-Training_for_ECCV_2018_paper.pdf)<br>
 This code refers to AlanChou's PyTorch implementation [link](https://github.com/AlanChou/Deep-Co-Training-for-Semi-Supervised-Image-Recognition)<br><br>
 To read my review on the paper(_written in Korean_), please follow the [link](https://mons2us.github.io/paper-reproduction/deeplearning/2020/12/26/deep_cotraining.html) to my blog.
 
